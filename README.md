@@ -1,5 +1,3 @@
-# Algo-Study
-
 # 알고리즘 스터디
 
 ## GitHub 사용방법
@@ -25,3 +23,4 @@
     - push 전 git fetch upstream를 통해 Upstream Repository의 최신 변경사항과 일치시킵니다.
 <pre> <code>git push origin <branchName></code></pre>
 8. 개인 Remote Repository에서 간단한 코멘트와 함께 Pull Request를 생성합니다.
+
