@@ -23,4 +23,5 @@
     - push 전 git fetch upstream를 통해 Upstream Repository의 최신 변경사항과 일치시킵니다.
 <pre> <code>git push origin <branchName></code></pre>
 8. 개인 Remote Repository에서 간단한 코멘트와 함께 Pull Request를 생성합니다.
-
+9. git에서는 한글 파일명을 제공하지 않습니다. 터미널에서 한글 파일명이 깨져보이는 현상 제거
+<pre><code>git config --global core.quotepath false </code></pre>
