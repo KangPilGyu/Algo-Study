@@ -27,7 +27,7 @@ class ListNode {
 public class LinkedListEx1 {
 	private ListNode head;  // ListNode 타입의 head 노트 인스턴스 변수
 	
-	// LinkedList 생성자
+	// LinkedListEx1() 생성자
 	public LinkedListEx1() {
 		head = null;  // head 노드 초기화
 	}
@@ -41,7 +41,7 @@ public class LinkedListEx1 {
 		newNode.link = preNode.link;
 		
 		// preNode의 link가 새로운 노드를 참조하도록 
-		// 최종적으로 'prenode -> newNode -> 기존 preNode의 다음 노드' 이렇게 구성 됨.
+		// 최종적으로 'preNode -> newNode -> 기존 preNode의 다음 노드' 이렇게 구성 됨.
 		preNode.link = newNode;
 	}
 	
@@ -73,7 +73,7 @@ public class LinkedListEx1 {
 	public void deleteNode(String data) {
 		// preNode는 head가  가리키는 노드를 할당
 		ListNode preNode = head;
-		// tempnode는 head가 가리키는 노드의 다음 노드 즉, prenode의 다음 노드를 할당
+		// tempNode는 head가 가리키는 노드의 다음 노드 즉, preNode의 다음 노드를 할당
 		ListNode tempNode = head.link;
 		
 		// 주어진 데이터가 preNode의 데이터와 일치하는 경우
