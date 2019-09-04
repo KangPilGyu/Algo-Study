@@ -12,15 +12,11 @@ public class baekjoon_1120 {
 		Scanner sc = new Scanner(System.in);
 		String a=sc.next(), b=sc.next();
 		int aLen=a.length(), bLen=b.length(), cnt=0;
-		if(aLen==bLen) {
-			System.out.println(count(a,b));
-		}else {
-			cnt=count(a , b.substring(bLen-aLen));
-			for(int i=0; i<bLen-aLen; i++) {
-				int func = count(a , b.substring(i,aLen+i));
-				if (cnt > func) cnt=func;
-			}
-			System.out.println(cnt);
+		cnt = count(a, b.substring(bLen - aLen));
+		for (int i=0; i<bLen-aLen; i++) {
+			int func = count(a, b.substring(i, aLen + i));
+			if (cnt > func) cnt = func;
 		}
+		System.out.println(cnt);
 	}
 }
