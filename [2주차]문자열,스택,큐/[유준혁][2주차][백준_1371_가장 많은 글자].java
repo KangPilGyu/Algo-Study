@@ -1,23 +1,26 @@
 package workspace;
 import java.util.*;
-public class baekjoon_10845 {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		List<Integer> list = new ArrayList<>();
-		int N = sc.nextInt();
-		for(int i=0; i<N; i++) {
-			String s = sc.next();
-			switch(s) {
-			case "push" : list.add(sc.nextInt());break;
-			case "pop"  : if(list.size()>0) {System.out.println( list.get(0) ); list.remove(0);}
-						  else System.out.println(-1); break;
-			case "size" : System.out.println( list.size() ); break;
-			case "empty": System.out.println( list.size()==0?1:0 ); break;
-			case "front": if(list.size()>0) System.out.println( list.get(0) );
-						  else System.out.println(-1); break;
-			case "back" : if(list.size()>0) System.out.println( list.get(list.size()-1) );
-			  			  else System.out.println(-1); break; 
+import java.io.*;
+public class baekjoon_1371 {
+	public static void main(String[] args) throws Exception{
+		//첫번째 시도. 겉보기에는 문제가 없어보이는데 while문을 빠져나오지를 못함. 검색 결과 EOF라는 걸 발견
+//		Scanner sc = new Scanner(System.in);
+//		int [] arr = new int [26];
+//		while(sc.hasNext()){
+//			for(byte b : sc.next().getBytes()) arr[b-'a']++;
+//		}
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int [] arr = new int [26];
+		String s;
+		while((s=br.readLine()) != null) { //EOF를 읽으면 null을 반환한다.
+			for(byte b : s.getBytes()) {
+				if(b==' ') continue;
+				arr[b-'a']++;
 			}
+		}
+		int max=Arrays.stream(arr).max().getAsInt();
+		for(int i=0; i<arr.length; i++) {
+			if(arr[i]==max) System.out.print((char)('a'+i));
 		}
 	}
 }
