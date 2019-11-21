@@ -1,5 +1,5 @@
 package baekjoon_bitmask;
-import java.util.*;
+import java.io.*;
 public class baekjoon_1730 {
 	static int[][] rst;
 	static int[][] wh = new int [][] {{0,1,0,-1}, {1,0,-1,0}};
@@ -7,11 +7,11 @@ public class baekjoon_1730 {
 	static boolean isRange(int i, int j) {
 		return (0 <= i && i < rst.length) && (0 <= j && j <rst.length);
 	}
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt();
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = new Integer(br.readLine());
 		rst = new int [n][n];
-		String command = sc.next();
+		String command = br.readLine();
 		int i = 0, j = 0;
 		for(byte b : command.getBytes()) {
 			int iplus = 0, jplus = 0, shift = 0;
