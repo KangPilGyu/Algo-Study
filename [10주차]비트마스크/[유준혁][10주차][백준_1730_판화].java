@@ -2,7 +2,7 @@ package baekjoon_bitmask;
 import java.io.*;
 public class baekjoon_1730 {
 	static int[][] rst;
-	static int[][] wh = new int [][] {{0,1,0,-1}, {1,0,-1,0}};
+	static int[][] wh = new int [][] {{1,0,-1,0}, {0,1,0,-1}};
 	static char[] ascii = new char[] {46, 124, 45, 43};
 	static boolean isRange(int i, int j) {
 		return (0 <= i && i < rst.length) && (0 <= j && j <rst.length);
