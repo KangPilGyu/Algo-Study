@@ -8,7 +8,7 @@ public class baekjoon_6603 {
 			return;
 		}
 		for(int i=idx; i < n; i++) {
-			if(n - idx + cnt + 1 < 6) break;
+			if(n - i + cnt + 1 < 6) break;
 			print(lotto, i + 1, cnt + 1, new StringBuffer(sb).append(lotto[i] + " "));
 		}
 	}
