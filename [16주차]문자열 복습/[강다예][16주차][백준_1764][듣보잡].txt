@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+//첫째 줄에 듣도 못한 사람의 수 N, 보도 못한 사람의 수 M이 주어진다. 이어서 둘째 줄부터 N개의 줄에 걸쳐 듣도 못한 사람의 이름과, N+2째 줄부터 보도 못한
+//사람의 이름이 순서대로 주어진다. 이름은 띄어쓰기 없이 영어 소문자로만 이루어지며, 그 길이는 20 이하이다. N, M은 500,000 이하의 자연수이다.
+
+//듣보잡의 수와 그 명단을 사전순으로 출력한다.
+public class Main{
+	static int N;
+	static int M;
+	
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		N = sc.nextInt();
+		M = sc.nextInt();
+		sc.nextLine();
+		
+		ArrayList<String> inputname = new ArrayList<>();
+		ArrayList<String> name = new ArrayList<>();
+		
+		
+		for (int i = 0; i < N; i++) {
+			inputname.add(sc.nextLine());
+		}
+		
+		for (int i = 0; i < M; i++) {			
+			String nm = sc.nextLine();
+			if (inputname.contains(nm)) {
+				name.add(nm);
+			}
+			
+		}
+		
+		System.out.println(name.size());
+		for (String string : name) {			
+			System.out.println(string);
+		}
+		
+		
+		
+	}
+
+}

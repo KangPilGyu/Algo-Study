@@ -1,0 +1,39 @@
+package inputoutput;
+
+import java.util.Scanner;
+
+public class j10809 {
+	// 알파벳 대소문자로 된 단어가 주어지면, 이 단어에서 가장 많이 사용된 알파벳이 무엇인지 알아내는 프로그램을 작성하시오. 단, 대문자와 소문자를 구분하지 않는다.
+	// 가장 많이 사용된 알파벳 갯수가 같으면 ? 출력
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		String s = sc.next().toUpperCase();//대문자로 변환
+		
+		int len = s.split("").length;
+		int [] arr = new int[26];
+		
+		//알파벳의 개수 만큼 arr배열에 추가해주기
+		for (int i = 0; i < len; i++) {//문자열의 길이만큼 for문
+			int idx = s.charAt(i)-65; //입력문자의 아스키코드값 -65를 해서 A-Z를 0~25로 표현
+			//System.out.println("s.charAt("+idx+") :"+ s.charAt(i));
+			arr[idx]++; //(문자열의 개수만큼 ++)
+		}
+		
+		int max = 0;
+		char maxstring ='?';
+		
+		for (int idx = 0; idx < arr.length; idx++) {
+			if (max < arr[idx]) {
+				max =arr[idx];				
+				maxstring=(char) (idx+65); //char형으로 변환해서 65를 더해준 후 문자로 변환
+			}else if (max==arr[idx]) { //arr[idx]의 값이 같으면
+				maxstring = '?';
+			}			
+		}
+		System.out.println(maxstring);
+
+		
+		
+	}
+}
