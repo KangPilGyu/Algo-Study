@@ -1,0 +1,64 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+/*첫 줄에는 상자의 크기를 나타내는 두 정수 M,N이 주어진다. M은 상자의 가로 칸의 수, N은 상자의 세로 칸의 수를 나타낸다. 단, 2 ≤ M,N ≤ 1,000 이다. 
+ * 둘째 줄부터는 하나의 상자에 저장된 토마토들의 정보가 주어진다. 즉, 둘째 줄부터 N개의 줄에는 상자에 담긴 토마토의 정보가 주어진다.
+ * 
+ * 여러분은 토마토가 모두 익을 때까지의 최소 날짜를 출력해야 한다. 만약, 저장될 때부터 모든 토마토가 익어있는 상태이면 0을 출력해야 하고, 
+ * 토마토가 모두 익지는 못하는 상황이면 -1을 출력해야 한다.
+ * */
+public class Main{
+	static int m, n, cnt;
+	static int[][] wh = new int[][] { { 1, 0, -1, 0 }, { 0, 1, 0, -1 } };
+	static int[][] map;
+	static Queue<int[]> q = new LinkedList<>();
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		m = sc.nextInt();
+		n = sc.nextInt();
+		map = new int[n][m];
+
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				map[i][j] = sc.nextInt();
+				if (map[i][j] == 1)
+					q.add(new int[] { i, j });
+			}
+		}
+
+		bfs();
+
+	}
+
+	static void bfs() {
+
+		while (!q.isEmpty()) {
+			int[] arr = q.poll();
+
+			for (int i = 0; i < 4; i++) {
+				int ii = arr[0] + wh[0][i];
+				int jj = arr[1] + wh[1][i];
+
+				if (0 <= ii && 0 <= jj && ii < n && jj < m) {
+					if (map[ii][jj] == 0) {
+						q.add(new int[] { ii, jj });
+						map[ii][jj] = map[arr[0]][arr[1]] + 1;
+						cnt = map[ii][jj] - 1;
+					}
+				} // if
+			} // for
+		} // q
+
+		for (int i = 0; i < m * n; i++) {
+			if (map[i / m][i % m] == 0) cnt = -1;
+			else if (cnt == 0)				cnt = 0;
+		}
+
+		System.out.println(cnt);
+
+	}// bfs
+
+}
