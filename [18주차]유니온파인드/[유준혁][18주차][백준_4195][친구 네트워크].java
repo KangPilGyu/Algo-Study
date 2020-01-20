@@ -1,66 +1,66 @@
 package baekjoon_unionfind;
 // https://www.acmicpc.net/problem/4195
-// Ä£±¸ ³×Æ®¿öÅ©
+// ì¹œêµ¬ ë„¤íŠ¸ì›Œí¬
 /*
- * ¹®Á¦
-¹ÎÇõÀÌ´Â ¼Ò¼È ³×Æ®¿öÅ© »çÀÌÆ®¿¡¼­ Ä£±¸¸¦ ¸¸µå´Â °ÍÀ» ÁÁ¾ÆÇÏ´Â Ä£±¸ÀÌ´Ù. 
-¿ìÇ¥¸¦ ¸ðÀ¸´Â Ãë¹Ì°¡ ÀÖµíÀÌ, ¹ÎÇõÀÌ´Â ¼Ò¼È ³×Æ®¿öÅ© »çÀÌÆ®¿¡¼­ Ä£±¸¸¦ ¸ðÀ¸´Â °ÍÀÌ Ãë¹ÌÀÌ´Ù.
+ * ë¬¸ì œ
+ë¯¼í˜ì´ëŠ” ì†Œì…œ ë„¤íŠ¸ì›Œí¬ ì‚¬ì´íŠ¸ì—ì„œ ì¹œêµ¬ë¥¼ ë§Œë“œëŠ” ê²ƒì„ ì¢‹ì•„í•˜ëŠ” ì¹œêµ¬ì´ë‹¤. 
+ìš°í‘œë¥¼ ëª¨ìœ¼ëŠ” ì·¨ë¯¸ê°€ ìžˆë“¯ì´, ë¯¼í˜ì´ëŠ” ì†Œì…œ ë„¤íŠ¸ì›Œí¬ ì‚¬ì´íŠ¸ì—ì„œ ì¹œêµ¬ë¥¼ ëª¨ìœ¼ëŠ” ê²ƒì´ ì·¨ë¯¸ì´ë‹¤.
 
-¾î¶² »çÀÌÆ®ÀÇ Ä£±¸ °ü°è°¡ »ý±ä ¼ø¼­´ë·Î ÁÖ¾îÁ³À» ¶§, 
-µÎ »ç¶÷ÀÇ Ä£±¸ ³×Æ®¿öÅ©¿¡ ¸î ¸íÀÌ ÀÖ´ÂÁö ±¸ÇÏ´Â ÇÁ·Î±×·¥À» ÀÛ¼ºÇÏ½Ã¿À.
+ì–´ë–¤ ì‚¬ì´íŠ¸ì˜ ì¹œêµ¬ ê´€ê³„ê°€ ìƒê¸´ ìˆœì„œëŒ€ë¡œ ì£¼ì–´ì¡Œì„ ë•Œ, 
+ë‘ ì‚¬ëžŒì˜ ì¹œêµ¬ ë„¤íŠ¸ì›Œí¬ì— ëª‡ ëª…ì´ ìžˆëŠ”ì§€ êµ¬í•˜ëŠ” í”„ë¡œê·¸ëž¨ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 
-Ä£±¸ ³×Æ®¿öÅ©¶õ Ä£±¸ °ü°è¸¸À¸·Î ÀÌµ¿ÇÒ ¼ö ÀÖ´Â »çÀÌ¸¦ ¸»ÇÑ´Ù.
+ì¹œêµ¬ ë„¤íŠ¸ì›Œí¬ëž€ ì¹œêµ¬ ê´€ê³„ë§Œìœ¼ë¡œ ì´ë™í•  ìˆ˜ ìžˆëŠ” ì‚¬ì´ë¥¼ ë§í•œë‹¤.
 
-ÀÔ·Â
-Ã¹Â° ÁÙ¿¡ Å×½ºÆ® ÄÉÀÌ½ºÀÇ °³¼ö°¡ ÁÖ¾îÁø´Ù. 
-°¢ Å×½ºÆ® ÄÉÀÌ½ºÀÇ Ã¹Â° ÁÙ¿¡´Â Ä£±¸ °ü°èÀÇ ¼ö F°¡ ÁÖ¾îÁö¸ç, ÀÌ °ªÀº 100,000À» ³ÑÁö ¾Ê´Â´Ù. 
-´ÙÀ½ F°³ÀÇ ÁÙ¿¡´Â Ä£±¸ °ü°è°¡ »ý±ä ¼ø¼­´ë·Î ÁÖ¾îÁø´Ù. 
-Ä£±¸ °ü°è´Â µÎ »ç¿ëÀÚÀÇ ¾ÆÀÌµð·Î ÀÌ·ç¾îÁ® ÀÖÀ¸¸ç, ¾ËÆÄºª ´ë¹®ÀÚ ¶Ç´Â ¼Ò¹®ÀÚ·Î¸¸ ÀÌ·ç¾îÁø ±æÀÌ 20 ÀÌÇÏÀÇ ¹®ÀÚ¿­ÀÌ´Ù.
+ìž…ë ¥
+ì²«ì§¸ ì¤„ì— í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤ì˜ ê°œìˆ˜ê°€ ì£¼ì–´ì§„ë‹¤. 
+ê° í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤ì˜ ì²«ì§¸ ì¤„ì—ëŠ” ì¹œêµ¬ ê´€ê³„ì˜ ìˆ˜ Fê°€ ì£¼ì–´ì§€ë©°, ì´ ê°’ì€ 100,000ì„ ë„˜ì§€ ì•ŠëŠ”ë‹¤. 
+ë‹¤ìŒ Fê°œì˜ ì¤„ì—ëŠ” ì¹œêµ¬ ê´€ê³„ê°€ ìƒê¸´ ìˆœì„œëŒ€ë¡œ ì£¼ì–´ì§„ë‹¤. 
+ì¹œêµ¬ ê´€ê³„ëŠ” ë‘ ì‚¬ìš©ìžì˜ ì•„ì´ë””ë¡œ ì´ë£¨ì–´ì ¸ ìžˆìœ¼ë©°, ì•ŒíŒŒë²³ ëŒ€ë¬¸ìž ë˜ëŠ” ì†Œë¬¸ìžë¡œë§Œ ì´ë£¨ì–´ì§„ ê¸¸ì´ 20 ì´í•˜ì˜ ë¬¸ìžì—´ì´ë‹¤.
 
-Ãâ·Â
-Ä£±¸ °ü°è°¡ »ý±æ ¶§¸¶´Ù, µÎ »ç¶÷ÀÇ Ä£±¸ ³×Æ®¿öÅ©¿¡ ¸î ¸íÀÌ ÀÖ´ÂÁö ±¸ÇÏ´Â ÇÁ·Î±×·¥À» ÀÛ¼ºÇÏ½Ã¿À.
+ì¶œë ¥
+ì¹œêµ¬ ê´€ê³„ê°€ ìƒê¸¸ ë•Œë§ˆë‹¤, ë‘ ì‚¬ëžŒì˜ ì¹œêµ¬ ë„¤íŠ¸ì›Œí¬ì— ëª‡ ëª…ì´ ìžˆëŠ”ì§€ êµ¬í•˜ëŠ” í”„ë¡œê·¸ëž¨ì„ ìž‘ì„±í•˜ì‹œì˜¤.
  */
 
 /*
- * ¹®Á¦ Ç®±â Àü »ý°¢ 2020.01.19 20:40
+ * ë¬¸ì œ í’€ê¸° ì „ ìƒê° 2020.01.19 20:40
  * -------------
- * ±âº»ÀûÀÎ À¯´Ï¿Â ÆÄÀÎµå ¹®Á¦¿Í µ¿ÀÏÇÏÁö¸¸ ÀÎµ¦½º °ªÀÌ ¾Æ´Ï¶ó Æ¯Á¤ stringÀÌ µé¾î¿À¹Ç·Î mapÀ» ½á¾ß°Ú´Ù´Â »ý°¢ÀÌ µç´Ù.
- * Ä£±¸ °ü°èÀÇ ¼ö°¡ 100,000À» ³ÑÁö ¾Ê´Â´Ù°í ÇÏ¿´À¸´Ï ¹è¿­Àº ³Ë³ËÇÏ°Ô 200,001·Î ¹èÁ¤. (¸ðµç °ü°è°¡ ¼­·Î¸¸ ÀÌ¾îÁ®ÀÖ´Â °æ¿ì 200,000)
- * »õ·Î¿î ÀÌ¸§ÀÌ µé¾î¿À¸é ¹è¿­ ÀÎµ¦½º¸¦ ¹èÁ¤. Ä£±¸ °ü°è¿¡ ´ëÇÑ union-find ÁøÇà.
- * ÀÌ·±½ÄÀ¸·Î Ç®¸é µÇÁö ¾ÊÀ»±î ½Í´Ù.
+ * ê¸°ë³¸ì ì¸ ìœ ë‹ˆì˜¨ íŒŒì¸ë“œ ë¬¸ì œì™€ ë™ì¼í•˜ì§€ë§Œ ì¸ë±ìŠ¤ ê°’ì´ ì•„ë‹ˆë¼ íŠ¹ì • stringì´ ë“¤ì–´ì˜¤ë¯€ë¡œ mapì„ ì¨ì•¼ê² ë‹¤ëŠ” ìƒê°ì´ ë“ ë‹¤.
+ * ì¹œêµ¬ ê´€ê³„ì˜ ìˆ˜ê°€ 100,000ì„ ë„˜ì§€ ì•ŠëŠ”ë‹¤ê³  í•˜ì˜€ìœ¼ë‹ˆ ë°°ì—´ì€ ë„‰ë„‰í•˜ê²Œ 200,001ë¡œ ë°°ì •. (ëª¨ë“  ê´€ê³„ê°€ ì„œë¡œë§Œ ì´ì–´ì ¸ìžˆëŠ” ê²½ìš° 200,000)
+ * ìƒˆë¡œìš´ ì´ë¦„ì´ ë“¤ì–´ì˜¤ë©´ ë°°ì—´ ì¸ë±ìŠ¤ë¥¼ ë°°ì •. ì¹œêµ¬ ê´€ê³„ì— ëŒ€í•œ union-find ì§„í–‰.
+ * ì´ëŸ°ì‹ìœ¼ë¡œ í’€ë©´ ë˜ì§€ ì•Šì„ê¹Œ ì‹¶ë‹¤.
  * 
- * ¹®Á¦ Ç®¸é¼­ µç »ý°¢ 2020.01.19 21:00
+ * ë¬¸ì œ í’€ë©´ì„œ ë“  ìƒê° 2020.01.19 21:00
  * -------------
- * ÇÕÄ¡´Â°Ç ±Ý¹æ ³¡³Â´Âµ¥ Ä£±¸ °ü°è¿¡ ´ëÇÑ Ä«¿îÆ® ÇÏ´Â ºÎºÐÀÌ Á¶±Ý ¸·Èù´Ù.
- * °£´ÜÇÏ°Ô »ý°¢ÇßÀ»¶© ¹è¿­ ¸ðµç °÷À» µ¹¸é¼­ ¼¼´Â °Ô ½±°ÚÁö¸¸
- * ¹®Á¦´Â ±×°Ô ÇÑ row¸¦ ÀÐÀ»¶§¸¶´Ù ½ÇÇàÇØ¾ßÇÏ±â ¶§¹®¿¡ ¸Å¹ø 2¾ï¹øÀÌ °É¸°´Ù.
- * ±× 2¾ï¹ø¿¡¼­ ±×Ä¡´Â°Ô ¾Æ´Ï¶ó Å×½ºÆ®ÄÉÀÌ½º ¸¸Å­ ¶Ç µ¹¾Æ¾ßÇÏ±â ¶§¹®¿¡ »ó´çÇÑ ½Ã°£ÀÌ °É¸± °Í °°Àºµ¥ °¨ÀÌ Á» ¾ÈÀâÈù´Ù.
- * Ã³À½¿£ À¯ÆÄ¸¦ ÁøÇàÇÏ¸é¼­ °»½ÅµÇ´Â ¾ÖµéÀ» countÇÏ°í, ±× °ªµéÀ» countMap¿¡ ¾÷µ¥ÀÌÆ® ÃÄÁÖ´Â °É »ý°¢Çß´Âµ¥ ¸·»ó ÇÏ´Ï±î Á» ²¿ÀÌ³×.
+ * í•©ì¹˜ëŠ”ê±´ ê¸ˆë°© ëëƒˆëŠ”ë° ì¹œêµ¬ ê´€ê³„ì— ëŒ€í•œ ì¹´ìš´íŠ¸ í•˜ëŠ” ë¶€ë¶„ì´ ì¡°ê¸ˆ ë§‰ížŒë‹¤.
+ * ê°„ë‹¨í•˜ê²Œ ìƒê°í–ˆì„ë• ë°°ì—´ ëª¨ë“  ê³³ì„ ëŒë©´ì„œ ì„¸ëŠ” ê²Œ ì‰½ê² ì§€ë§Œ
+ * ë¬¸ì œëŠ” ê·¸ê²Œ í•œ rowë¥¼ ì½ì„ë•Œë§ˆë‹¤ ì‹¤í–‰í•´ì•¼í•˜ê¸° ë•Œë¬¸ì— ë§¤ë²ˆ 2ì–µë²ˆì´ ê±¸ë¦°ë‹¤.
+ * ê·¸ 2ì–µë²ˆì—ì„œ ê·¸ì¹˜ëŠ”ê²Œ ì•„ë‹ˆë¼ í…ŒìŠ¤íŠ¸ì¼€ì´ìŠ¤ ë§Œí¼ ë˜ ëŒì•„ì•¼í•˜ê¸° ë•Œë¬¸ì— ìƒë‹¹í•œ ì‹œê°„ì´ ê±¸ë¦´ ê²ƒ ê°™ì€ë° ê°ì´ ì¢€ ì•ˆìž¡ížŒë‹¤.
+ * ì²˜ìŒì—” ìœ íŒŒë¥¼ ì§„í–‰í•˜ë©´ì„œ ê°±ì‹ ë˜ëŠ” ì• ë“¤ì„ countí•˜ê³ , ê·¸ ê°’ë“¤ì„ countMapì— ì—…ë°ì´íŠ¸ ì³ì£¼ëŠ” ê±¸ ìƒê°í–ˆëŠ”ë° ë§‰ìƒ í•˜ë‹ˆê¹Œ ì¢€ ê¼¬ì´ë„¤.
  * 
- * ¹®Á¦ Ç®°í ³­ ÈÄ µç »ý°¢ 2020.01.19 21:14
+ * ë¬¸ì œ í’€ê³  ë‚œ í›„ ë“  ìƒê° 2020.01.19 21:14
  * -------------
- * countMapÀ» µû·Î µÎ·Á°íÇÏ´Ùº¸´Ï Á» ²¿ÀÎ °Í °°¾Ò´Ù.
- * ±×·¡¼­ arr¿Í µ¿ÀÏÇÏ°Ô cnt¶ó´Â ¹è¿­À» ¼±¾ðÇØÁÖ°í, unionÀÌ ÁøÇà µÉ ¶§ ¸¶´Ù ¾÷µ¥ÀÌÆ® ÇØÁÖ¾ú´Ù.
+ * countMapì„ ë”°ë¡œ ë‘ë ¤ê³ í•˜ë‹¤ë³´ë‹ˆ ì¢€ ê¼¬ì¸ ê²ƒ ê°™ì•˜ë‹¤.
+ * ê·¸ëž˜ì„œ arrì™€ ë™ì¼í•˜ê²Œ cntë¼ëŠ” ë°°ì—´ì„ ì„ ì–¸í•´ì£¼ê³ , unionì´ ì§„í–‰ ë  ë•Œ ë§ˆë‹¤ ì—…ë°ì´íŠ¸ í•´ì£¼ì—ˆë‹¤.
  */
 import java.util.*;
 import java.io.*;
 public class baekjoon_4195 {
-	static int[] arr, cnt;
-	static int union(int a, int b) {
-		a = find(a);
-		b = find(b);
-        if(a != b) {
-        	arr[a] = b;
-        	cnt[b] += cnt[a];
-        	cnt[a] = 1;
+    static int[] arr, cnt;
+        static int union(int a, int b) {
+    	    a = find(a);
+    	    b = find(b);
+    	    if(a != b) {
+                arr[a] = b;
+                cnt[b] += cnt[a];
+                cnt[a] = 1;
+            }
+            return cnt[b];
         }
-        return cnt[b];
-	}
-
-    static int find(int x) {
-        if(x == arr[x]) return x;
-        return arr[x] = find(arr[x]);
-    }
+    
+        static int find(int x) {
+            if(x == arr[x]) return x;
+            return arr[x] = find(arr[x]);
+        }
 	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
