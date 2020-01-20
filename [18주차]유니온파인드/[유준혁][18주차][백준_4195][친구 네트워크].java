@@ -58,8 +58,8 @@ public class baekjoon_4195 {
 	}
     
         static int find(int x) {
-            if(x == arr[x]) return x;
-            return arr[x] = find(arr[x]);
+        	if(x == arr[x]) return x;
+        	return arr[x] = find(arr[x]);
         }
 	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
