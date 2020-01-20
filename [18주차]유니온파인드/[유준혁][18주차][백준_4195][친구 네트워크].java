@@ -45,17 +45,17 @@ package baekjoon_unionfind;
 import java.util.*;
 import java.io.*;
 public class baekjoon_4195 {
-    static int[] arr, cnt;
-        static int union(int a, int b) {
-    	    a = find(a);
-    	    b = find(b);
-    	    if(a != b) {
-                arr[a] = b;
-                cnt[b] += cnt[a];
-                cnt[a] = 1;
-            }
-            return cnt[b];
-        }
+	static int[] arr, cnt;
+	static int union(int a, int b) {
+		a = find(a);
+		b = find(b);
+		if(a != b) {
+			arr[a] = b;
+			cnt[b] += cnt[a];
+			cnt[a] = 1;
+		}
+		return cnt[b];
+	}
     
         static int find(int x) {
             if(x == arr[x]) return x;
