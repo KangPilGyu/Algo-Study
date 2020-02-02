@@ -45,23 +45,31 @@ public class P2887_2 {
                 pQueueZ.add(new Planet(Integer.parseInt(st.nextToken()), i));
             }
             
+            Planet x1 = pQueueX.poll();
+            Planet y1 = pQueueY.poll();
+            Planet z1 = pQueueZ.poll();
             for (int i = 0; i < N-1; i++) {
-                Planet x1 = pQueueX.poll();
-                Planet y1 = pQueueY.poll();
-                Planet z1 = pQueueZ.poll();
-                Planet x2 = pQueueX.peek();
-                Planet y2 = pQueueY.peek();
-                Planet z2 = pQueueZ.peek();
+                Planet x2 = pQueueX.poll();
+                Planet y2 = pQueueY.poll();
+                Planet z2 = pQueueZ.poll();
                 pQueueT.add(new Tn(x1.node, x2.node, x2.xyz-x1.xyz));
                 pQueueT.add(new Tn(y1.node, y2.node, y2.xyz-y1.xyz));
                 pQueueT.add(new Tn(z1.node, z2.node, z2.xyz-z1.xyz));
+                x1 = x2;
+                y1 = y2;
+                z1 = z2;
             }
             int sz = pQueueT.size();
             int total = 0;
+            int cnt = 0;
             for (int i = 0; i < sz; i++) {
                 Tn t = pQueueT.poll();
                 if(union(t.node1, t.node2) == 1) {
                     total += t.cost;
+                    cnt++;
+                }
+                if(cnt == N-1) {
+                    break;
                 }
             }
             System.out.println(total);
