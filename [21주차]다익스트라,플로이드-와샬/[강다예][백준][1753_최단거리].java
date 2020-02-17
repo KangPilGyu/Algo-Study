@@ -1,5 +1,3 @@
-package inputoutput;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,7 +6,8 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 /*
-첫째 줄에 정점의 개수 V와 간선의 개수 E가 주어진다. (1≤V≤20,000, 1≤E≤300,000) 모든 정점에는 1부터 V까지 번호가 매겨져 있다고 가정한다. 
+첫째 줄에 정점의 개수 V와 간선의 
+개수 E가 주어진다. (1≤V≤20,000, 1≤E≤300,000) 모든 정점에는 1부터 V까지 번호가 매겨져 있다고 가정한다. 
 둘째 줄에는 시작 정점의 번호 K(1≤K≤V)가 주어진다. 셋째 줄부터 E개의 줄에 걸쳐 각 간선을 나타내는 세 개의 정수 (u, v, w)가 순서대로 주어진다. 
 이는 u에서 v로 가는 가중치 w인 간선이 존재한다는 뜻이다. u와 v는 서로 다르며 w는 10 이하의 자연수이다. 
 서로 다른 두 정점 사이에 여러 개의 간선이 존재할 수도 있음에 유의한다.
@@ -28,7 +27,7 @@ import java.util.StringTokenizer;
 7
 INF
 */
-public class j1753 {
+public class Main{
 	static int V, E, K; // 정점,간선,시작번호
 	static int[] dist;// 시작점부터의 거리를 담음
 	static boolean [] vst;
@@ -68,22 +67,24 @@ public class j1753 {
 	}
 
 	private static void solve(int start) {
-		PriorityQueue<Integer> pq = new PriorityQueue<>();
+		PriorityQueue<Node> pq = new PriorityQueue<>();
 		dist[K] = 0; // 자기자신과의 거리는 0
-		pq.add(K);
+		pq.add(new Node(K,dist[K]));
 		
 		while (!pq.isEmpty()) {
-			int current = pq.poll();
-			
+			Node current = pq.poll();
+			if(vst[current.end]) {
+				continue;
+			}
 			//방문했기 때문에 true
-			vst[current] = true;
-			for (int i = 0; i <map[current].size();  i++) {
+			vst[current.end] = true;
+			for (int i = 0; i <map[current.end].size();  i++) {
 				//현재 정점에서 다음 정점을 비교해서 우선순위 큐에 넣어야 한다.
-				int next = map[current].get(i).end; //다음 정점
-				int value = map[current].get(i).cost; //현재-다음 간 cost 
-				if(!vst[next] && dist[next] > dist[current]+value) {//한번도 방문하지 않은 곳은 무조건 dist[next]가 크다.
-					dist[next] = dist[current]+value;
-					pq.add(next);
+				int next = map[current.end].get(i).end; //다음 정점
+				int value = map[current.end].get(i).cost; //현재-다음 간 cost 
+				if(!vst[next] && dist[next] > dist[current.end]+value) {//한번도 방문하지 않은 곳은 무조건 dist[next]가 크다.
+					dist[next] = dist[current.end]+value;
+					pq.add(new Node(next,dist[next]));
 				}
 			}
 		}
@@ -91,12 +92,18 @@ public class j1753 {
 	}
 }
 
-class Node {
+class Node implements Comparable<Node>{
 	public int end;
 	public int cost;
 
 	public Node(int end, int cost) {
 		this.end = end;
 		this.cost = cost;
+	}
+
+	@Override
+	public int compareTo(Node o) {
+		
+		return this.cost > o.cost ? 1 : -1;
 	}
 }
