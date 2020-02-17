@@ -2,7 +2,7 @@ import java.util.*;
 public class baekjoon_11403 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-        StringBuffer sb = new StringBuffer();
+        	StringBuffer sb = new StringBuffer();
 		int n = sc.nextInt();
 		int[][] arr = new int[n][n];
 		for(int i = 0; i < n*n; i++) arr[i/n][i%n] = sc.nextInt();
