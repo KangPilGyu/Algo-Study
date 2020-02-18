@@ -58,13 +58,13 @@ class Main{
 	
 	static long sum(int b, int c, int idx, int s, int e){
 		int half = (s + e) / 2;
-        long sum = 0;
+        	long sum = 0;
 		if(b <= s && e <= c) return seg[idx];
 		else if(b <= half){
-            sum = sum(b, c, idx * 2, s, half);
+            		sum = sum(b, c, idx * 2, s, half);
 			if(c > half) sum += sum(b, c, idx * 2 + 1, half + 1, e);
 		}else if(half <= b){
-            sum = sum(b, c, idx * 2 + 1, half + 1, e);
+            		sum = sum(b, c, idx * 2 + 1, half + 1, e);
 			if(half > c) sum += sum(b, c, idx * 2, s, half);
 		}
 		return sum;
