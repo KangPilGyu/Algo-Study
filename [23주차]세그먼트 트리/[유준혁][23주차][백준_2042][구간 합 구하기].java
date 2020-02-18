@@ -1,6 +1,8 @@
 import java.util.*;
 import java.io.*;
 class Main{
+	static BufferedReader br;
+	static BufferedWriter bw;
 	static long[] seg;
 	static int n, m, level, len, a, b;
 	static int level(int a){
@@ -8,8 +10,8 @@ class Main{
 		return 1 + level(a / 2);
 	}
 	public static void main(String[] ar) throws Exception{
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		br = new BufferedReader(new InputStreamReader(System.in));
+		bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		n = Integer.parseInt(st.nextToken());
 		m = Integer.parseInt(st.nextToken()) + Integer.parseInt(st.nextToken());
@@ -17,7 +19,7 @@ class Main{
 		len = 1 << level;
 		seg = new long[len + 1];
 		int cnt = 0;
-		for(int i = (1 << (level - 1)) + 1; cnt < n; cnt++, i++){
+		for(int i = (1 << (level - 1)); cnt < n; cnt++, i++){
 			seg[i] = Long.parseLong(br.readLine());
 		}
 		init();
@@ -27,16 +29,16 @@ class Main{
 			b = Integer.parseInt(st.nextToken());
 			long c = Long.parseLong(st.nextToken());
 			if(a == 1){
-				update(b, c);
+				update((1 << (level - 1)) + b - 1, c);
 			}else{
-				System.out.println(sum(b, (int)c, 1, 1, len / 2));
+				bw.write((sum(b, (int)c, 1, 1, len / 2)) + "\n");
 			}
 		}
-		
+		bw.flush();
 	}
 	
 	static void init(){
-		int i = (seg.length / 2);
+		int i = ((len + 1) / 4);
 		while(i > 0){
 			for(int x = i; x < i * 2; x++){
 				seg[x] = seg[x * 2] + seg[x * 2 + 1];
@@ -45,30 +47,26 @@ class Main{
 		}
 	}
 	
-	static void update(int b, long c){
+	static void update(int b, long c) {
+		long cha = c - seg[b];
 		seg[b] = c;
 		while(b > 0){
 			b /= 2;
-			seg[b] += c;
+			seg[b] += cha;
 		}
 	}
 	
 	static long sum(int b, int c, int idx, int s, int e){
 		int half = (s + e) / 2;
+        long sum = 0;
 		if(b <= s && e <= c) return seg[idx];
 		else if(b <= half){
-			if(c <= half){
-				return sum(b, c, idx * 2, s, half);
-			}else{
-				return sum(b, c, idx * 2, s, half) + sum(b, c, idx * 2 + 1, half + 1, e);
-			}
+            sum = sum(b, c, idx * 2, s, half);
+			if(c > half) sum += sum(b, c, idx * 2 + 1, half + 1, e);
 		}else if(half <= b){
-			if(half <= c){
-				return sum(b, c, idx * 2 + 1, half + 1, e);
-			}else{
-				return sum(b, c, idx * 2 + 1, half + 1, e) + sum(b, c, idx * 2, s, half);
-			}
+            sum = sum(b, c, idx * 2 + 1, half + 1, e);
+			if(half > c) sum += sum(b, c, idx * 2, s, half);
 		}
-		return 0;
+		return sum;
 	}
 }
