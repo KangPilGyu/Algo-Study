@@ -1,6 +1,6 @@
 package baekjoon_lis;
 // https://www.acmicpc.net/problem/11055
-// °¡Àå Å« Áõ°¡ÇÏ´Â ºÎºĞ ¼ö¿­
+// ê°€ì¥ í° ì¦ê°€í•˜ëŠ” ë¶€ë¶„ ìˆ˜ì—´
 import java.util.*;
 public class baekjoon_11055 {
 	public static void main(String[] args) {
@@ -12,8 +12,8 @@ public class baekjoon_11055 {
 			dp[i] = arr[i];
 			for(int j=0; j<i; j++) {
 				if(arr[i] > arr[j] && dp[i] < dp[j] + arr[i]) {
-	                dp[i] = dp[j] + arr[i];
-	            }
+	                		dp[i] = dp[j] + arr[i];
+				}
 			}
 		}
 		System.out.println(Arrays.stream(dp).max().getAsInt());
