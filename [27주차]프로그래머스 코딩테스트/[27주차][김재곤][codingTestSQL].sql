@@ -1,0 +1,25 @@
+create table CARTS (
+    ID INT,
+    USER_ID INT,
+    PRODUCT_COUNT INT,
+    CONSTRAINT CARTS_PK PRIMARY KEY (ID)
+);
+drop table CARTS;
+INSERT INTO CARTS VALUES(977, 9, 15);
+
+create table CART_PRODUCTS (
+    ID INT,
+    CART_ID INT,
+    NAME VARCHAR2(20),
+    PRICE INT,
+    CONSTRAINT PRODUCTS_PK PRIMARY KEY (ID),
+    CONSTRAINT PRODUCTS_FK FOREIGN KEY (CART_ID) REFERENCES CARTS(ID)
+);
+INSERT INTO cart_products VALUES(19128, 977, '밀가루', 1580);
+
+select A.USER_ID
+from carts A, cart_products B 
+where B.CART_ID = A.ID AND B.NAME = '밀가루'
+GROUP BY A.USER_ID
+order by A.USER_ID;
+
