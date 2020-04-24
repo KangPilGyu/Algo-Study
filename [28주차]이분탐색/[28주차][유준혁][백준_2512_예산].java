@@ -1,6 +1,6 @@
 package baekjoon_binary_search;
 // https://www.acmicpc.net/problem/2512
-// ¿¹»ê
+// Â¿Â¹Â»Ãª
 
 import java.util.*;
 public class baekjoon_2512 {
