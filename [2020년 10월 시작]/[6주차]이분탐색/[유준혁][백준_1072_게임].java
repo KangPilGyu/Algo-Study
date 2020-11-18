@@ -10,6 +10,7 @@ class baekjoon_1072{
 		if(r < 99){
 			while(left <= right){
 				int mid = (left / 2) + (right / 2);
+				//left랑 right 값 미리 2를 나눠주고 시작
 				int R = (int)((double)(m + mid) * 100 / (n + mid));
 				if(r < R){
 					rst = Math.min(rst, mid);
